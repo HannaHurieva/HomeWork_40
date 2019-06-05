@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
-public class Controller {
+public class BeanController {
 
     private final BeanContextService beanConrextService;
 
     @Autowired
-    public Controller(BeanContextService beanConrextService) {
+    public BeanController(BeanContextService beanConrextService) {
         this.beanConrextService = beanConrextService;
     }
 
