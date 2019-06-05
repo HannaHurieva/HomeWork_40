@@ -1,7 +1,7 @@
 package com.alewel.homework40;
 
 import com.alewel.homework40.dto.BeanContext;
-import com.alewel.homework40.service.BeanConrextService;
+import com.alewel.homework40.service.BeanContextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,30 +11,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
-    @Autowired
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
+    private final BeanContextService beanContextService;
 
     @Autowired
-    private BeanConrextService beanConrextService;
-
-    public void displayAllBeans() {
-        String[] allBeanNames = applicationContext.getBeanDefinitionNames();
-        for (String beanName : allBeanNames) {
-            System.out.println(applicationContext.getBean(beanName).hashCode());
-            System.out.println(beanName);
-
-            System.out.println(
-                    ((ConfigurableApplicationContext) applicationContext)
-                            .getBeanFactory()
-                            .getBeanDefinition(beanName)
-                            .getScope());
-
-            System.out.println(applicationContext.isSingleton(beanName));
-            System.out.println(applicationContext.isPrototype(beanName));
-
-            System.out.println("**********");
-            System.out.println();
-        }
+    public Application(ApplicationContext applicationContext, BeanContextService beanContextService) {
+        this.applicationContext = applicationContext;
+        this.beanContextService = beanContextService;
     }
 
     public void createTableBeans() {
@@ -53,14 +36,13 @@ public class Application implements CommandLineRunner {
 
             bean.setSingleton(applicationContext.isSingleton(beanName));
 
-            beanConrextService.save(bean);
+            beanContextService.save(bean);
         }
     }
 
     @Override
     public void run(String... args) throws Exception {
         createTableBeans();
-        displayAllBeans();
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package com.alewel.homework40.controller;
 
 import com.alewel.homework40.dto.BeanContext;
-import com.alewel.homework40.service.BeanConrextService;
+import com.alewel.homework40.service.BeanContextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +13,10 @@ import java.util.List;
 @RequestMapping("/")
 public class Controller {
 
-    private final BeanConrextService beanConrextService;
+    private final BeanContextService beanConrextService;
 
     @Autowired
-    public Controller(BeanConrextService beanConrextService) {
+    public Controller(BeanContextService beanConrextService) {
         this.beanConrextService = beanConrextService;
     }
 
